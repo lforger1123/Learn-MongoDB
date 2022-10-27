@@ -66,3 +66,44 @@ There are 4 most common types of SQL DBs, each with their own characteristic adv
   - It is similar to Relational DB, however, it stores data as columns as opposed to rows.
   - This is done to proved faster read speeds by being able to quickly aggregate data of a specific column.
   - Amazon's Redshift is a popular choice in this category.
+
+----------
+
+# **Introduction to MongoDB**
+MongoDB is a DBMS that allows users to store data using the document model. The data stored here is typically in the fashion of JSON, BSON and YAML.
+
+## Advantages of MongoDB
+- ### Flexibility and Scalability
+  MongoDB is drastically flexible, suppose we want to change the data in a relational model, that change would impact thousands and millions of data entries, something which we don't see with mongoDB as it allows us to interact with each entity separately. So if any changes are to be accomodated our system is flexible enough to handle them. <br>
+  Additionally applications may have a tendency to grow and in those cases mongoDB offers multiple easy to use options to accomodate scalability of the application.
+
+- ### Developer Friendly
+  Being a modern and popular DBMS, it has a variety of use cases not only in web, mobile or desktop applications but also in data analytics and visualisations. <br>
+  Due to this it has a broad community of developers and a plethora of resources to learn and detailed documentation to facilitate the developers at any level.
+
+- ### Diverse Cloud Tooling
+  The strongest advantage of using MongoDB is availability of a wide array of cloud tools.
+  - **MongoDB Atlas** is a multi-cloud DB service. It allows uses to create, manage and deploy MongoDB DBs with just a ew clicks. The main advantage is that these DBs are hosted in cloud and don't require developers to install MongoDB on their computers but use an online dashboard.
+  - **MongoDB Realm** is another cloud offering that promotes fast development of applications that are integrated with mongodb. For instance if we were to build a mobile app then we could use Realm to create a DB on each phone and seamlessly synchronize it across all devices and databases. Also we could use it for authentication.
+
+
+## Collections and Documents
+As we know that MongoDB uses documents within collections to store data. To visualise it, we can think of it as; <br>
+At the highest level we our MongoDB instance that contains all the data, then we have collections, ie, subsets of our data. For instance, in case of a camera store, our collections would be purchase data, inventory, customer info. Now each of these collections have their records, ie, data in the form of documents. 2 documents can have entirely different data.
+
+## Why is JSON inefficent?
+One of the main advantages of using document DB is the flexibiltiy it provides. In case of MongoDB this flexbility comes partly from JSON. The primary advanage of JSON is its readablity and flexibilty. Data is stored in an easily editable format that is comprehensibe to humans as well as our computers. But that comes at a price;
+- JSON is inefficient form a computational perspective as the data is time consuming to parse.
+- Due to its readability its not exactly storage efficient, as long text would require more space.
+- JSON does not support all types of data like dates
+
+## BSON - MongoDB's Storage Format
+Binary Javascript Object Notation, is the format MongoDB uses to store data. It is categorically different from JSON on 3 keynotes;
+- It is not human readable as it is binary.
+- It is storage efficient as it is binary.
+- It supports a large number of data formats as it is binary.
+
+It looks like this:
+> \x00\x00\x00\x02name\x00\a\x00\x00\x00Rodney\x00\x02occupation\x00\r\x00\x00\x00photographer\x00\x10year_of_experience\x00\a\x00\x00\x00\x00
+
+MongoDB invented BSON to bridge the gap between flexibilty and readability of JSON and required performance for large databases. MongoDB stores data as BSON internally but allows the users to create and manipulate databse data as JSON. This allows for developers to experience the best of both worlds.

@@ -43,3 +43,26 @@ Another most popular DB is the Non-Relational Database, commonly known as NoSQL 
 
 ## Why NoSQL?
 Over the time as datasets become larger and more and more complex, develoeprs began looking for more flexible and scalable DB solutions.
+
+## Types of NoSQL Databases
+There are 4 most common types of SQL DBs, each with their own characteristic adv and disadv.
+
+- ### Key-Value:
+  - This type of DB is the ebst when data is attributed to a unique key.
+  - The data here can range from numbers to complex objects.
+  - Amazon DynamoDB and Redis are popular in this category.
+
+- ### Document
+  - In some document oriented DBs data is stored in hierarchial structures.
+  - These documents are very flexible as they can evolve to fit an applications needs.
+  - MongoDB is a popular option in this category.
+
+- ### Graph
+  - It stores data in nodes like a graph structure and estabilishes relationships via edges.
+  - The key adv is they are easy to setup, manage and query
+  - Neo4j is a popular option in this category.
+
+- ### Column Oriented
+  - It is similar to Relational DB, however, it stores data as columns as opposed to rows.
+  - This is done to proved faster read speeds by being able to quickly aggregate data of a specific column.
+  - Amazon's Redshift is a popular choice in this category.

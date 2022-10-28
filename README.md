@@ -107,3 +107,63 @@ It looks like this:
 > \x00\x00\x00\x02name\x00\a\x00\x00\x00Rodney\x00\x02occupation\x00\r\x00\x00\x00photographer\x00\x10year_of_experience\x00\a\x00\x00\x00\x00
 
 MongoDB invented BSON to bridge the gap between flexibilty and readability of JSON and required performance for large databases. MongoDB stores data as BSON internally but allows the users to create and manipulate databse data as JSON. This allows for developers to experience the best of both worlds.
+
+## CRUD in MongoDB
+MonogDB can be easily run in a terminal using the MongoDB Shell, `mongosh`. MongoDB allows us to store multiple databases inside of a single running instance.
+> `show dbs` - show all the databases running in our instance and the space they are occupying.
+
+There are 3 unique databases by default called the admin, local and config that are included by MongoDB to help configure our instance.
+
+> `use <db_name>` - will select that database to work on. If the said DB does not exists then MongoDB will create a new DB and place us inside it.
+
+> `db` - outputs the name of the current database that we are in.
+
+### What is Querying?
+Querying is the process by which we erquest the data from the database.
+
+After we get inside a DB, we can read the data by using the find() that would fetch the objects that match our query.
+
+> `db.collection_name.find()` - fetches the object that is the result of our query. We pass arguments in the form of objects
+> 
+> `it` - since all the data is not returned at once, we can use it that stands for iterate to view the rest of the data.
+
+The find() uses an operator to find matches to our query. An operator is a special syntax that specifies some logical action that we want to perform when our command executes. Incase of find() it uses the equality operator, ie, $eq to match documents that include the specified field and value.
+
+We can also explicitly include the equality operator by giving the parameter as 
+```javascript
+{
+  <field>: {$eq}: value 
+}
+```
+which is equivalent to 
+```javascript
+{
+    <field>: <value>
+}
+```
+
+We can also embed our documents within documents, ie, in a parent-child relationship. To access the child items of a document, we can have to use the standard dot notation but enclose them in quotes.
+
+MongoDB provides us with other operators as well, like `$gt`, `$gte`, `$lte` and `$lt`, something like this;
+```javascript
+db.<collection>.find( { <field>: { $gt: <value> } } )
+```
+
+Suppose we want to sort our data that we fetch form our find(). To achieve that we use the `db.collection_name.find().sort()`, ie, we chain it to our find() and then we pass in some arguments in the form of json. The values that these arguments take are either 1 (ascending) or -1 (descending)
+
+### Query Projections
+Suppose the document that we are accessing is very large and detailed. So whenever we run a find() then the entire document will be returned by us thereby making our work more tedious. So to tackle that we can use `projections` of our dataset, ie, just view only the fields that we want and omit the rest. Kind of like a filter.
+
+To make projections we pass in a second argument to our find(), an object where we can only give the name of fields on the document as keys with only 0 (hide) and 1 (show) values. The _id is automatically displayed, but we can hide it by passing 0 for it. Also we can only have inclusion and exclusion queries at once with _id. If we were to add 0 to some other fields and 1 to others, then mongosh will throw a `MongoServerError`. 
+
+
+### Querying an Array
+Suppose we have a book where each document has a field called genres which is an array. So if we want to filter only those books that have a certain genres in them then we will have to pass those genres as an array in the find() but that would be completely inaccurate because that would only fetch us those results where the genre field has only those genres and that too in that specific order. 
+
+To counter that we have the ability to match individual elements that occur in the array from what we have learnt in previous lessons. But if suppose we want to match an array then in that case we can use `$all` operator that would look for the said keywords in all the fields regardless of their order. 
+
+We can also query on an array by using multiple filters, ie, 
+```javascript
+db.<collection>.find({ <field>: { <operator>: <value>, <operator2>: <value2>, … } })
+```
+All we need to do is pass the operators as objects as the value to the field where we want to place a filter at.
